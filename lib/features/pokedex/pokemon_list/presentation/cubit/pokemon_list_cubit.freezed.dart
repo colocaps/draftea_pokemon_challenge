@@ -25,12 +25,12 @@ $PokemonListStateCopyWith<PokemonListState> get copyWith => _$PokemonListStateCo
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is PokemonListState&&const DeepCollectionEquality().equals(other.pokemonList, pokemonList)&&(identical(other.errorMessage, errorMessage) || other.errorMessage == errorMessage)&&(identical(other.dateTime, dateTime) || other.dateTime == dateTime)&&(identical(other.status, status) || other.status == status));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is PokemonListState&&(identical(other.pokemonList, pokemonList) || other.pokemonList == pokemonList)&&(identical(other.errorMessage, errorMessage) || other.errorMessage == errorMessage)&&(identical(other.dateTime, dateTime) || other.dateTime == dateTime)&&(identical(other.status, status) || other.status == status));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,const DeepCollectionEquality().hash(pokemonList),errorMessage,dateTime,status);
+int get hashCode => Object.hash(runtimeType,pokemonList,errorMessage,dateTime,status);
 
 @override
 String toString() {
@@ -49,7 +49,7 @@ $Res call({
 });
 
 
-
+$PokemonListModelCopyWith<$Res>? get pokemonList;
 
 }
 /// @nodoc
@@ -71,7 +71,19 @@ as DateTime?,status: freezed == status ? _self.status : status // ignore: cast_n
 as PokemonListStatus?,
   ));
 }
+/// Create a copy of PokemonListState
+/// with the given fields replaced by the non-null parameter values.
+@override
+@pragma('vm:prefer-inline')
+$PokemonListModelCopyWith<$Res>? get pokemonList {
+    if (_self.pokemonList == null) {
+    return null;
+  }
 
+  return $PokemonListModelCopyWith<$Res>(_self.pokemonList!, (value) {
+    return _then(_self.copyWith(pokemonList: value));
+  });
+}
 }
 
 
@@ -227,12 +239,12 @@ _$PokemonListStateCopyWith<_PokemonListState> get copyWith => __$PokemonListStat
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _PokemonListState&&const DeepCollectionEquality().equals(other.pokemonList, pokemonList)&&(identical(other.errorMessage, errorMessage) || other.errorMessage == errorMessage)&&(identical(other.dateTime, dateTime) || other.dateTime == dateTime)&&(identical(other.status, status) || other.status == status));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _PokemonListState&&(identical(other.pokemonList, pokemonList) || other.pokemonList == pokemonList)&&(identical(other.errorMessage, errorMessage) || other.errorMessage == errorMessage)&&(identical(other.dateTime, dateTime) || other.dateTime == dateTime)&&(identical(other.status, status) || other.status == status));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,const DeepCollectionEquality().hash(pokemonList),errorMessage,dateTime,status);
+int get hashCode => Object.hash(runtimeType,pokemonList,errorMessage,dateTime,status);
 
 @override
 String toString() {
@@ -251,7 +263,7 @@ $Res call({
 });
 
 
-
+@override $PokemonListModelCopyWith<$Res>? get pokemonList;
 
 }
 /// @nodoc
@@ -274,7 +286,19 @@ as PokemonListStatus?,
   ));
 }
 
+/// Create a copy of PokemonListState
+/// with the given fields replaced by the non-null parameter values.
+@override
+@pragma('vm:prefer-inline')
+$PokemonListModelCopyWith<$Res>? get pokemonList {
+    if (_self.pokemonList == null) {
+    return null;
+  }
 
+  return $PokemonListModelCopyWith<$Res>(_self.pokemonList!, (value) {
+    return _then(_self.copyWith(pokemonList: value));
+  });
+}
 }
 
 // dart format on

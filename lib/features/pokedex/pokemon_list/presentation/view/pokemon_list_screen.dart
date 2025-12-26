@@ -22,7 +22,7 @@ class PokemonListScreen extends StatelessWidget {
       )..getPokemonList(),
       child: BlocListener<PokemonListCubit, PokemonListState>(
         listener: (context, state) {
-          if (state.status == PokemonListStatus.error) {
+          if (state.errorMessage != null) {
             showTopSnackbar(
               context: context,
               icon: Assets.icons.stopBlockedIcon.svg(
@@ -33,23 +33,24 @@ class PokemonListScreen extends StatelessWidget {
               ),
               title: state.errorMessage ?? 'Ha ocurrido un error inesperado',
             );
+            context.read<PokemonListCubit>().clearError();
           }
         },
         child: const PageContainerSliver(
+          canPop: false,
           useGradientBackground: true,
           sliverAppbar: SliverAppBar(
-            expandedHeight: 120,
-            collapsedHeight: 120,
             automaticallyImplyLeading: false,
             centerTitle: true,
             backgroundColor: Colors.transparent,
-            flexibleSpace: FlexibleSpaceBar(
-              centerTitle: true,
-              titlePadding: EdgeInsets.only(bottom: 8),
-              title: CustomLabel(text: 'Pokedex'),
+            title: CustomLabel(
+              color: Colors.white,
+              text: 'Pokedex',
+              minFontsize: 20,
+              fontWeight: FontWeight.bold,
             ),
           ),
-          slivers: [SliverFillRemaining(child: PokemonListPage())],
+          slivers: [PokemonListSliver()],
         ),
       ),
     );

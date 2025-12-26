@@ -9,13 +9,7 @@ class GradientControlPoint {
 
 /// Widget que muestra un gradiente de malla
 class MeshGradientWidget extends StatelessWidget {
-  const MeshGradientWidget({
-    required this.controlPoints,
-    super.key,
-    this.blendFactor = 1.0,
-    this.child,
-  });
-  final List<GradientControlPoint> controlPoints;
+  const MeshGradientWidget({super.key, this.blendFactor = 1.0, this.child});
   final double blendFactor;
   final Widget? child;
 
@@ -23,23 +17,21 @@ class MeshGradientWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Stack(
       children: [
-        // Capa superior: Gradiente horizontal
         Positioned.fill(
           child: Container(
             decoration: const BoxDecoration(
               gradient: LinearGradient(
                 colors: [
-                  Color(0xFF2845D8),
-                  Color(0xFF5E5FE0),
-                  Color.fromARGB(255, 115, 85, 234),
-                  Color.fromARGB(255, 157, 130, 218),
+                  Color(0xFFE53935),
+                  Color.fromARGB(255, 238, 50, 50),
+                  Color.fromARGB(255, 238, 101, 101),
+                  Color.fromARGB(255, 241, 128, 128),
                 ],
                 stops: [0.0, 0.33, 0.66, 1.0],
               ),
             ),
           ),
         ),
-        // Capa inferior: Gradiente vertical
         Positioned.fill(
           child: Container(
             decoration: BoxDecoration(
@@ -47,8 +39,13 @@ class MeshGradientWidget extends StatelessWidget {
                 begin: Alignment.topCenter,
                 end: Alignment.bottomCenter,
                 colors: [
-                  const Color(0xFF2845D8).withValues(alpha:0),
-                  const Color(0xFF001BA8).withValues(alpha:0.8),
+                  const Color(0xFFE53935).withValues(alpha: 0),
+                  const Color.fromARGB(
+                    255,
+                    237,
+                    162,
+                    145,
+                  ).withValues(alpha: 0.8),
                 ],
               ),
             ),

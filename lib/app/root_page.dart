@@ -1,8 +1,7 @@
+import 'package:draftea_pokemon_challenge/core/connectivity/connectivity_check_bloc.dart';
+import 'package:draftea_pokemon_challenge/ui/widgets/no_internet_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:draftea_pokemon_challenge/core/connectivity/connectivity_check_bloc.dart';
-import 'package:draftea_pokemon_challenge/ui/bottombar/presentation/custom_bottom_bar.dart';
-import 'package:draftea_pokemon_challenge/ui/widgets/no_internet_widget.dart';
 
 class RootPage extends StatefulWidget {
   const RootPage({required this.child, super.key});
@@ -36,8 +35,7 @@ class _RootPageState extends State<RootPage> {
                         ? 0.4
                         : 1,
                     child: Scaffold(
-                      backgroundColor: Colors.black,
-                      bottomNavigationBar: const CustomBottomBar(),
+                      backgroundColor: Colors.white,
                       body: widget.child,
                     ),
                   ),

@@ -1,10 +1,12 @@
 import 'package:draftea_pokemon_challenge/core/networking/base_repository.dart';
+import 'package:draftea_pokemon_challenge/features/pokedex/pokemon_list/data/mapper/pokemon_list_dto_to_model.dart';
+import 'package:draftea_pokemon_challenge/features/pokedex/pokemon_list/domain/model/pokemon_list_model.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 part 'pokemon_list_response_dto.g.dart';
 
 @JsonSerializable()
-class PokemonListResponseDto extends BaseDtoResponse<PokemonListResponseDto> {
+class PokemonListResponseDto extends BaseDtoResponse<PokemonListModel> {
   PokemonListResponseDto({
     required this.count,
     required this.next,
@@ -27,7 +29,9 @@ class PokemonListResponseDto extends BaseDtoResponse<PokemonListResponseDto> {
   Map<String, dynamic> toJson() => _$PokemonListResponseDtoToJson(this);
 
   @override
-  PokemonListResponseDto toDomainModel() => this;
+  PokemonListModel toDomainModel() {
+    return toModel();
+  }
 }
 
 @JsonSerializable()

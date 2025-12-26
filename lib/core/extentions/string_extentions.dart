@@ -1,6 +1,19 @@
 import 'package:intl/intl.dart';
 
-extension StringExt on String {
+extension StringExtension on String {
+  String getCleanVersion() {
+    final index = indexOf('.');
+    if (index == -1) {
+      return this;
+    }
+    return split('.').take(3).join('.');
+  }
+
+  String capitalize() {
+    if (isEmpty) return this;
+    return this[0].toUpperCase() + substring(1);
+  }
+
   String obscureText() {
     final length = this.length;
 
@@ -10,26 +23,6 @@ extension StringExt on String {
     }
 
     return buffer.toString();
-  }
-}
-
-extension StringExtension on String {
-  String getCleanVersion() {
-    final index = indexOf('.');
-    if (index == -1) {
-      return this;
-    }
-    return split('.').take(3).join('.');
-  }
-}
-
-extension CurrencyFormatting on int {
-  String toCurrency() {
-    if (this >= 0) {
-      return '\$$this';
-    } else {
-      return '-\$${abs()}';
-    }
   }
 }
 

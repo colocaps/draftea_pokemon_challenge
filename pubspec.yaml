@@ -1,5 +1,5 @@
 name: draftea_pokemon_challenge
-description: Tu app de salud.
+description: Tu app de pokemon.
 
 publish_to: "none" # Remove this line if you wish to publish to pub.dev
 
@@ -36,7 +36,7 @@ dependencies:
   package_info_plus: ^8.0.0
   path_provider: ^2.0.12
   pretty_dio_logger: ^1.3.1
-  retrofit:
+  retrofit: 4.9.0
   shared_preferences: ^2.2.2
   shimmer:
   top_snackbar_flutter: ^3.1.0
@@ -59,7 +59,7 @@ dev_dependencies:
   injectable_generator:
   json_serializable:
   plugin_platform_interface:
-  retrofit_generator:
+  retrofit_generator: 10.0.4
   very_good_analysis: ^5.1.0
 
 # dependency_overrides:

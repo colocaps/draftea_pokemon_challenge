@@ -25,12 +25,6 @@ import 'package:draftea_pokemon_challenge/core/networking/logger_module.dart'
     as _i132;
 import 'package:draftea_pokemon_challenge/core/networking/network_module.dart'
     as _i276;
-import 'package:draftea_pokemon_challenge/core/repository/app_repository.dart'
-    as _i346;
-import 'package:draftea_pokemon_challenge/core/repository/app_repository_impl.dart'
-    as _i788;
-import 'package:draftea_pokemon_challenge/core/repository/user_feature_repository.dart'
-    as _i356;
 import 'package:draftea_pokemon_challenge/core/session/token.dart' as _i931;
 import 'package:draftea_pokemon_challenge/core/utils/timer_service.dart'
     as _i854;
@@ -44,13 +38,10 @@ import 'package:draftea_pokemon_challenge/features/pokedex/pokemon_list/domain/r
     as _i624;
 import 'package:draftea_pokemon_challenge/features/pokedex/pokemon_list/domain/usecase/get_pokemon_list_usecase.dart'
     as _i332;
-import 'package:draftea_pokemon_challenge/ui/bottombar/domain/repository/bottom_bar_feature_repository.dart'
-    as _i776;
 import 'package:get_it/get_it.dart' as _i174;
 import 'package:injectable/injectable.dart' as _i526;
 import 'package:logger/logger.dart' as _i974;
 import 'package:pretty_dio_logger/pretty_dio_logger.dart' as _i528;
-import 'package:shared_preferences/shared_preferences.dart' as _i460;
 
 extension GetItInjectableX on _i174.GetIt {
   // initializes the registration of main-scope dependencies inside of GetIt
@@ -76,9 +67,6 @@ extension GetItInjectableX on _i174.GetIt {
       () => _i854.LobbyListTimerService(),
     );
     gh.lazySingleton<_i854.UserTimerService>(() => _i854.UserTimerService());
-    gh.singleton<_i776.BottomBarFeatureRepository>(
-      () => _i776.BottomBarFeatureRepositoryImpl(),
-    );
     gh.factory<_i625.AppInfoRepository>(() => _i625.AppInfoRepositoryImpl());
     gh.singleton<_i889.ChEventBus>(() => _i65.ChEventBusImpl());
     gh.factory<_i969.draftea_pokemon_challengeInterceptor>(
@@ -89,14 +77,6 @@ extension GetItInjectableX on _i174.GetIt {
     gh.factory<_i1065.DrafteaInterceptor>(
       () => _i1065.DrafteaInterceptor(
         appInfoRepository: gh<_i625.AppInfoRepository>(),
-      ),
-    );
-    gh.lazySingleton<_i346.AppRepository>(
-      () => _i788.AppRepositoryImpl(prefs: gh<_i460.SharedPreferences>()),
-    );
-    gh.singleton<_i356.UserFeatureRepository>(
-      () => _i356.UserFeatureRepositoryImpl(
-        appRepository: gh<_i346.AppRepository>(),
       ),
     );
     gh.lazySingleton<_i361.Dio>(

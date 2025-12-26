@@ -87,8 +87,6 @@ class PageContainerSliver extends StatelessWidget {
         ),
       );
 
-      // Si se aplica el padding horizontal, centrar y
-      //limitar el ancho del footer también
       final wrappedFooter = applyHorizontalPadding
           ? Center(
               child: SizedBox(
@@ -124,26 +122,7 @@ class PageContainerSliver extends StatelessWidget {
       body: useGradientBackground
           ? Stack(
               children: [
-                const MeshGradientWidget(
-                  controlPoints: [
-                    GradientControlPoint(
-                      position: Offset(0.8, 0.3),
-                      color: Color.fromARGB(255, 86, 53, 221),
-                    ),
-                    GradientControlPoint(
-                      position: Offset(0.4, 0.8),
-                      color: Color.fromARGB(255, 19, 6, 68),
-                    ),
-                    GradientControlPoint(
-                      position: Offset(0.6, 0.9),
-                      color: Color.fromARGB(255, 83, 39, 184),
-                    ),
-                    GradientControlPoint(
-                      position: Offset(0.2, 0.2),
-                      color: Color.fromARGB(255, 0, 2, 14),
-                    ),
-                  ],
-                ),
+                const MeshGradientWidget(),
                 buildContentWithOverlay(bodyContent),
               ],
             )

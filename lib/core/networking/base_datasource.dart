@@ -3,8 +3,6 @@ import 'dart:developer';
 import 'package:dio/dio.dart';
 import 'package:draftea_pokemon_challenge/core/api/api_result.dart';
 import 'package:draftea_pokemon_challenge/core/exceptions/http_exceptions.dart';
-import 'package:draftea_pokemon_challenge/core/repository/app_repository.dart';
-import 'package:draftea_pokemon_challenge/di/injection.dart';
 
 abstract class BaseDataSource {
   Future<ApiResult<T>> executeRequest<T>({

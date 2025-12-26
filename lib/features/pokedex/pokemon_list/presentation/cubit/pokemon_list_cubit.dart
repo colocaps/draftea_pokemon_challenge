@@ -12,9 +12,15 @@ class PokemonListCubit extends Cubit<PokemonListState> {
       super(const PokemonListState());
   final GetPokemonListUsecase _getPokemonListUsecase;
 
+  static const int _defaultLimit = 20;
+  bool _isLoadingMore = false;
+
   Future<void> getPokemonList() async {
-    emit(state.copyWith(status: PokemonListStatus.loading));
-    final result = await _getPokemonListUsecase();
+    emit(state.copyWith(status: PokemonListStatus.loading, errorMessage: null));
+    final result = await _getPokemonListUsecase(
+      limit: _defaultLimit,
+      offset: 0,
+    );
     result.fold(
       (failure) => emit(
         state.copyWith(
@@ -27,9 +33,67 @@ class PokemonListCubit extends Cubit<PokemonListState> {
         state.copyWith(
           status: PokemonListStatus.loaded,
           pokemonList: pokemonList,
+          errorMessage: null,
           dateTime: DateTime.now(),
         ),
       ),
     );
+  }
+
+  Future<void> loadMore() async {
+    final current = state.pokemonList;
+    if (current == null) return;
+    if (current.next == null) return;
+    if (_isLoadingMore) return;
+
+    final currentResults = current.results;
+    final offset = currentResults.length;
+
+    _isLoadingMore = true;
+    emit(state.copyWith(status: PokemonListStatus.loading));
+
+    final result = await _getPokemonListUsecase(
+      limit: _defaultLimit,
+      offset: offset,
+    );
+
+    result.fold(
+      (failure) {
+        _isLoadingMore = false;
+        emit(
+          state.copyWith(
+            status: PokemonListStatus.loaded,
+            errorMessage: failure.exceptionMapper.message,
+            dateTime: DateTime.now(),
+          ),
+        );
+      },
+      (nextPage) {
+        _isLoadingMore = false;
+        final merged = <PokemonListItemModel>[
+          ...currentResults,
+          ...nextPage.results,
+        ];
+
+        emit(
+          state.copyWith(
+            status: PokemonListStatus.loaded,
+            pokemonList: PokemonListModel(
+              count: nextPage.count,
+              next: nextPage.next,
+              previous: nextPage.previous,
+              results: merged,
+            ),
+            errorMessage: null,
+            dateTime: DateTime.now(),
+          ),
+        );
+      },
+    );
+  }
+
+  void clearError() {
+    if (state.errorMessage == null) return;
+    emit(state.copyWith(errorMessage: null));
   }
 }

@@ -1,9 +1,7 @@
 import 'dart:developer';
 
-import 'package:draftea_pokemon_challenge/app/root_page_mobile.dart';
-import 'package:draftea_pokemon_challenge/features/hup/dashboard/presentation/view/dashboard_screen.dart';
+import 'package:draftea_pokemon_challenge/app/root_page.dart';
 import 'package:draftea_pokemon_challenge/features/pokedex/pokemon_list/presentation/view/pokemon_list_screen.dart';
-import 'package:draftea_pokemon_challenge/ui/shared/custom_webview.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
@@ -14,7 +12,7 @@ final router = GoRouter(
     log('error on go router');
   },
   debugLogDiagnostics: true,
-  initialLocation: DashboardScreen.path,
+  initialLocation: PokemonListScreen.path,
   navigatorKey: _rootNavigatorKey,
   routes: [...mainRoutes],
 );
@@ -37,30 +35,14 @@ final mainRoutes = [
       StatefulShellBranch(
         routes: [
           GoRoute(
-            path: DashboardScreen.path,
-            name: DashboardScreen.routeName,
+            path: PokemonListScreen.path,
+            name: PokemonListScreen.routeName,
             builder: (context, state) {
-              return const DashboardScreen();
+              return const PokemonListScreen();
             },
           ),
         ],
       ),
     ],
-  ),
-
-  GoRoute(
-    path: CustomWebView.routePath,
-    name: CustomWebView.routeName,
-    builder: (context, state) {
-      final data = state.extra! as String;
-      return CustomWebView(url: data, mainRouteName: DashboardScreen.routeName);
-    },
-  ),
-  GoRoute(
-    path: PokemonListScreen.path,
-    name: PokemonListScreen.routeName,
-    builder: (context, state) {
-      return const PokemonListScreen();
-    },
   ),
 ];
