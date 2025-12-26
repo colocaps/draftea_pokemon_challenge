@@ -7,6 +7,7 @@ class PokemonListItemCard extends StatelessWidget {
     required this.name,
     required this.id,
     required this.formatId,
+    this.isSelected = false,
     this.onTap,
     super.key,
   });
@@ -15,11 +16,18 @@ class PokemonListItemCard extends StatelessWidget {
   final String name;
   final int? id;
   final String Function(int id) formatId;
+  final bool isSelected;
   final VoidCallback? onTap;
 
   @override
   Widget build(BuildContext context) {
     final subtitle = id != null ? formatId(id!) : '#${index + 1}';
+    final borderColor = isSelected
+        ? Colors.white.withValues(alpha: 0.55)
+        : Colors.white.withValues(alpha: 0.10);
+    final bgColor = isSelected
+        ? Colors.white.withValues(alpha: 0.16)
+        : Colors.white.withValues(alpha: 0.08);
 
     return Material(
       color: Colors.transparent,
@@ -28,9 +36,9 @@ class PokemonListItemCard extends StatelessWidget {
         onTap: onTap,
         child: DecoratedBox(
           decoration: BoxDecoration(
-            color: Colors.white.withValues(alpha: 0.08),
+            color: bgColor,
             borderRadius: BorderRadius.circular(14),
-            border: Border.all(color: Colors.white.withValues(alpha: 0.10)),
+            border: Border.all(color: borderColor),
           ),
           child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 10),

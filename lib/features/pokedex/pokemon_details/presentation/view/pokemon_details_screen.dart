@@ -7,7 +7,7 @@ import 'package:draftea_pokemon_challenge/ui/label/custom_label.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-class PokemonDetailsScreen extends StatelessWidget {
+class PokemonDetailsScreen extends StatefulWidget {
   const PokemonDetailsScreen({required this.idOrName, super.key});
 
   static const String routeName = '/pokemon-details';
@@ -16,11 +16,41 @@ class PokemonDetailsScreen extends StatelessWidget {
   final String idOrName;
 
   @override
+  State<PokemonDetailsScreen> createState() => _PokemonDetailsScreenState();
+}
+
+class _PokemonDetailsScreenState extends State<PokemonDetailsScreen> {
+  late final PokemonDetailsCubit _cubit;
+
+  @override
+  void initState() {
+    super.initState();
+    _cubit = PokemonDetailsCubit(
+      getPokemonDetailsUsecase: getIt<GetPokemonDetailsUsecase>(),
+    );
+    if (widget.idOrName.isNotEmpty) {
+      _cubit.getPokemonDetails(widget.idOrName);
+    }
+  }
+
+  @override
+  void didUpdateWidget(covariant PokemonDetailsScreen oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    if (oldWidget.idOrName != widget.idOrName && widget.idOrName.isNotEmpty) {
+      _cubit.getPokemonDetails(widget.idOrName);
+    }
+  }
+
+  @override
+  void dispose() {
+    _cubit.close();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (context) => PokemonDetailsCubit(
-        getPokemonDetailsUsecase: getIt<GetPokemonDetailsUsecase>(),
-      )..getPokemonDetails(idOrName),
+    return BlocProvider.value(
+      value: _cubit,
       child: const PageContainerSliver(
         useGradientBackground: true,
         sliverAppbar: SliverAppBar(
@@ -34,7 +64,7 @@ class PokemonDetailsScreen extends StatelessWidget {
             minFontsize: 20,
           ),
         ),
-        slivers: [PokemonDetailsSliver()],
+        slivers: [PokemonDetailsPage()],
       ),
     );
   }

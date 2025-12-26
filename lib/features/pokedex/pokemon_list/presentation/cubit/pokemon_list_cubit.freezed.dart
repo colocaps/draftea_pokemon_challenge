@@ -14,7 +14,7 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$PokemonListState {
 
- PokemonListModel? get pokemonList; String? get errorMessage; DateTime? get dateTime; PokemonListStatus? get status;
+ PokemonListModel? get pokemonList; String? get errorMessage; DateTime? get dateTime; PokemonListStatus? get status; String get selectedIdOrName;
 /// Create a copy of PokemonListState
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -25,16 +25,16 @@ $PokemonListStateCopyWith<PokemonListState> get copyWith => _$PokemonListStateCo
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is PokemonListState&&(identical(other.pokemonList, pokemonList) || other.pokemonList == pokemonList)&&(identical(other.errorMessage, errorMessage) || other.errorMessage == errorMessage)&&(identical(other.dateTime, dateTime) || other.dateTime == dateTime)&&(identical(other.status, status) || other.status == status));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is PokemonListState&&(identical(other.pokemonList, pokemonList) || other.pokemonList == pokemonList)&&(identical(other.errorMessage, errorMessage) || other.errorMessage == errorMessage)&&(identical(other.dateTime, dateTime) || other.dateTime == dateTime)&&(identical(other.status, status) || other.status == status)&&(identical(other.selectedIdOrName, selectedIdOrName) || other.selectedIdOrName == selectedIdOrName));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,pokemonList,errorMessage,dateTime,status);
+int get hashCode => Object.hash(runtimeType,pokemonList,errorMessage,dateTime,status,selectedIdOrName);
 
 @override
 String toString() {
-  return 'PokemonListState(pokemonList: $pokemonList, errorMessage: $errorMessage, dateTime: $dateTime, status: $status)';
+  return 'PokemonListState(pokemonList: $pokemonList, errorMessage: $errorMessage, dateTime: $dateTime, status: $status, selectedIdOrName: $selectedIdOrName)';
 }
 
 
@@ -45,7 +45,7 @@ abstract mixin class $PokemonListStateCopyWith<$Res>  {
   factory $PokemonListStateCopyWith(PokemonListState value, $Res Function(PokemonListState) _then) = _$PokemonListStateCopyWithImpl;
 @useResult
 $Res call({
- PokemonListModel? pokemonList, String? errorMessage, DateTime? dateTime, PokemonListStatus? status
+ PokemonListModel? pokemonList, String? errorMessage, DateTime? dateTime, PokemonListStatus? status, String selectedIdOrName
 });
 
 
@@ -62,13 +62,14 @@ class _$PokemonListStateCopyWithImpl<$Res>
 
 /// Create a copy of PokemonListState
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? pokemonList = freezed,Object? errorMessage = freezed,Object? dateTime = freezed,Object? status = freezed,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? pokemonList = freezed,Object? errorMessage = freezed,Object? dateTime = freezed,Object? status = freezed,Object? selectedIdOrName = null,}) {
   return _then(_self.copyWith(
 pokemonList: freezed == pokemonList ? _self.pokemonList : pokemonList // ignore: cast_nullable_to_non_nullable
 as PokemonListModel?,errorMessage: freezed == errorMessage ? _self.errorMessage : errorMessage // ignore: cast_nullable_to_non_nullable
 as String?,dateTime: freezed == dateTime ? _self.dateTime : dateTime // ignore: cast_nullable_to_non_nullable
 as DateTime?,status: freezed == status ? _self.status : status // ignore: cast_nullable_to_non_nullable
-as PokemonListStatus?,
+as PokemonListStatus?,selectedIdOrName: null == selectedIdOrName ? _self.selectedIdOrName : selectedIdOrName // ignore: cast_nullable_to_non_nullable
+as String,
   ));
 }
 /// Create a copy of PokemonListState
@@ -165,10 +166,10 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( PokemonListModel? pokemonList,  String? errorMessage,  DateTime? dateTime,  PokemonListStatus? status)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( PokemonListModel? pokemonList,  String? errorMessage,  DateTime? dateTime,  PokemonListStatus? status,  String selectedIdOrName)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _PokemonListState() when $default != null:
-return $default(_that.pokemonList,_that.errorMessage,_that.dateTime,_that.status);case _:
+return $default(_that.pokemonList,_that.errorMessage,_that.dateTime,_that.status,_that.selectedIdOrName);case _:
   return orElse();
 
 }
@@ -186,10 +187,10 @@ return $default(_that.pokemonList,_that.errorMessage,_that.dateTime,_that.status
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( PokemonListModel? pokemonList,  String? errorMessage,  DateTime? dateTime,  PokemonListStatus? status)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( PokemonListModel? pokemonList,  String? errorMessage,  DateTime? dateTime,  PokemonListStatus? status,  String selectedIdOrName)  $default,) {final _that = this;
 switch (_that) {
 case _PokemonListState():
-return $default(_that.pokemonList,_that.errorMessage,_that.dateTime,_that.status);case _:
+return $default(_that.pokemonList,_that.errorMessage,_that.dateTime,_that.status,_that.selectedIdOrName);case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -206,10 +207,10 @@ return $default(_that.pokemonList,_that.errorMessage,_that.dateTime,_that.status
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( PokemonListModel? pokemonList,  String? errorMessage,  DateTime? dateTime,  PokemonListStatus? status)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( PokemonListModel? pokemonList,  String? errorMessage,  DateTime? dateTime,  PokemonListStatus? status,  String selectedIdOrName)?  $default,) {final _that = this;
 switch (_that) {
 case _PokemonListState() when $default != null:
-return $default(_that.pokemonList,_that.errorMessage,_that.dateTime,_that.status);case _:
+return $default(_that.pokemonList,_that.errorMessage,_that.dateTime,_that.status,_that.selectedIdOrName);case _:
   return null;
 
 }
@@ -221,13 +222,14 @@ return $default(_that.pokemonList,_that.errorMessage,_that.dateTime,_that.status
 
 
 class _PokemonListState implements PokemonListState {
-  const _PokemonListState({this.pokemonList, this.errorMessage, this.dateTime, this.status});
+  const _PokemonListState({this.pokemonList, this.errorMessage, this.dateTime, this.status, this.selectedIdOrName = '1'});
   
 
 @override final  PokemonListModel? pokemonList;
 @override final  String? errorMessage;
 @override final  DateTime? dateTime;
 @override final  PokemonListStatus? status;
+@override@JsonKey() final  String selectedIdOrName;
 
 /// Create a copy of PokemonListState
 /// with the given fields replaced by the non-null parameter values.
@@ -239,16 +241,16 @@ _$PokemonListStateCopyWith<_PokemonListState> get copyWith => __$PokemonListStat
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _PokemonListState&&(identical(other.pokemonList, pokemonList) || other.pokemonList == pokemonList)&&(identical(other.errorMessage, errorMessage) || other.errorMessage == errorMessage)&&(identical(other.dateTime, dateTime) || other.dateTime == dateTime)&&(identical(other.status, status) || other.status == status));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _PokemonListState&&(identical(other.pokemonList, pokemonList) || other.pokemonList == pokemonList)&&(identical(other.errorMessage, errorMessage) || other.errorMessage == errorMessage)&&(identical(other.dateTime, dateTime) || other.dateTime == dateTime)&&(identical(other.status, status) || other.status == status)&&(identical(other.selectedIdOrName, selectedIdOrName) || other.selectedIdOrName == selectedIdOrName));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,pokemonList,errorMessage,dateTime,status);
+int get hashCode => Object.hash(runtimeType,pokemonList,errorMessage,dateTime,status,selectedIdOrName);
 
 @override
 String toString() {
-  return 'PokemonListState(pokemonList: $pokemonList, errorMessage: $errorMessage, dateTime: $dateTime, status: $status)';
+  return 'PokemonListState(pokemonList: $pokemonList, errorMessage: $errorMessage, dateTime: $dateTime, status: $status, selectedIdOrName: $selectedIdOrName)';
 }
 
 
@@ -259,7 +261,7 @@ abstract mixin class _$PokemonListStateCopyWith<$Res> implements $PokemonListSta
   factory _$PokemonListStateCopyWith(_PokemonListState value, $Res Function(_PokemonListState) _then) = __$PokemonListStateCopyWithImpl;
 @override @useResult
 $Res call({
- PokemonListModel? pokemonList, String? errorMessage, DateTime? dateTime, PokemonListStatus? status
+ PokemonListModel? pokemonList, String? errorMessage, DateTime? dateTime, PokemonListStatus? status, String selectedIdOrName
 });
 
 
@@ -276,13 +278,14 @@ class __$PokemonListStateCopyWithImpl<$Res>
 
 /// Create a copy of PokemonListState
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? pokemonList = freezed,Object? errorMessage = freezed,Object? dateTime = freezed,Object? status = freezed,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? pokemonList = freezed,Object? errorMessage = freezed,Object? dateTime = freezed,Object? status = freezed,Object? selectedIdOrName = null,}) {
   return _then(_PokemonListState(
 pokemonList: freezed == pokemonList ? _self.pokemonList : pokemonList // ignore: cast_nullable_to_non_nullable
 as PokemonListModel?,errorMessage: freezed == errorMessage ? _self.errorMessage : errorMessage // ignore: cast_nullable_to_non_nullable
 as String?,dateTime: freezed == dateTime ? _self.dateTime : dateTime // ignore: cast_nullable_to_non_nullable
 as DateTime?,status: freezed == status ? _self.status : status // ignore: cast_nullable_to_non_nullable
-as PokemonListStatus?,
+as PokemonListStatus?,selectedIdOrName: null == selectedIdOrName ? _self.selectedIdOrName : selectedIdOrName // ignore: cast_nullable_to_non_nullable
+as String,
   ));
 }
 

@@ -15,6 +15,12 @@ class PokemonListCubit extends Cubit<PokemonListState> {
   static const int _defaultLimit = 20;
   bool _isLoadingMore = false;
 
+  void selectPokemon(String idOrName) {
+    if (idOrName.isEmpty) return;
+    if (state.selectedIdOrName == idOrName) return;
+    emit(state.copyWith(selectedIdOrName: idOrName));
+  }
+
   Future<void> getPokemonList() async {
     emit(state.copyWith(status: PokemonListStatus.loading, errorMessage: null));
     final result = await _getPokemonListUsecase(

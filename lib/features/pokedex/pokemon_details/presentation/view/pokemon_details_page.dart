@@ -3,20 +3,26 @@ import 'package:draftea_pokemon_challenge/features/pokedex/pokemon_details/prese
 import 'package:draftea_pokemon_challenge/features/pokedex/pokemon_details/presentation/widget/pokemon_detail_info_card.dart';
 import 'package:draftea_pokemon_challenge/features/pokedex/pokemon_details/presentation/widget/pokemon_detail_stat_row.dart';
 import 'package:draftea_pokemon_challenge/features/pokedex/pokemon_details/presentation/widget/pokemon_detail_type_chip.dart';
+import 'package:draftea_pokemon_challenge/gen/assets.gen.dart';
 import 'package:draftea_pokemon_challenge/ui/label/custom_label.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-class PokemonDetailsSliver extends StatelessWidget {
-  const PokemonDetailsSliver({super.key});
+class PokemonDetailsPage extends StatelessWidget {
+  const PokemonDetailsPage({super.key});
 
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<PokemonDetailsCubit, PokemonDetailsState>(
       builder: (context, state) {
         if (state.status == PokemonDetailsStatus.loading) {
-          return const SliverFillRemaining(
-            child: Center(child: CircularProgressIndicator()),
+          return SliverFillRemaining(
+            child: Center(
+              child: Assets.lottie.pokeballLoader.lottie(
+                width: 100,
+                height: 100,
+              ),
+            ),
           );
         }
 

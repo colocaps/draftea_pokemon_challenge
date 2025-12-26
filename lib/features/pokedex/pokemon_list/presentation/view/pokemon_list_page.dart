@@ -2,20 +2,14 @@ import 'package:draftea_pokemon_challenge/core/extentions/string_extentions.dart
 import 'package:draftea_pokemon_challenge/features/pokedex/pokemon_details/presentation/view/pokemon_details_screen.dart';
 import 'package:draftea_pokemon_challenge/features/pokedex/pokemon_list/presentation/cubit/pokemon_list_cubit.dart';
 import 'package:draftea_pokemon_challenge/features/pokedex/pokemon_list/presentation/widget/pokemon_list_item.dart';
+import 'package:draftea_pokemon_challenge/features/pokedex/utils/pokemon_utils.dart';
+import 'package:draftea_pokemon_challenge/gen/assets.gen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 
-class PokemonListSliver extends StatelessWidget {
-  const PokemonListSliver({super.key});
-
-  int? _pokemonIdFromUrl(String url) {
-    // Ej: https://pokeapi.co/api/v2/pokemon/1/
-    final match = RegExp(r'/pokemon/(\d+)/?$').firstMatch(url);
-    return match == null ? null : int.tryParse(match.group(1)!);
-  }
-
-  String _formatId(int id) => '#${id.toString().padLeft(3, '0')}';
+class PokemonListPage extends StatelessWidget {
+  const PokemonListPage({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -31,8 +25,13 @@ class PokemonListSliver extends StatelessWidget {
         final hasMore = state.pokemonList?.next != null;
 
         if (isInitialLoading) {
-          return const SliverFillRemaining(
-            child: Center(child: CircularProgressIndicator()),
+          return SliverFillRemaining(
+            child: Center(
+              child: Assets.lottie.pokeballLoader.lottie(
+                width: 100,
+                height: 100,
+              ),
+            ),
           );
         }
 
@@ -86,10 +85,10 @@ class PokemonListSliver extends StatelessWidget {
                 child: PokemonListItemCard(
                   index: index,
                   name: results[index].name.capitalize(),
-                  id: _pokemonIdFromUrl(results[index].url),
-                  formatId: _formatId,
+                  id: pokemonIdFromUrl(results[index].url),
+                  formatId: pokemonFormatId,
                   onTap: () {
-                    final id = _pokemonIdFromUrl(results[index].url);
+                    final id = pokemonIdFromUrl(results[index].url);
                     final idOrName = id?.toString() ?? results[index].name;
                     context.pushNamed(
                       PokemonDetailsScreen.routeName,

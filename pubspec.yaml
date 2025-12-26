@@ -32,6 +32,7 @@ dependencies:
   intl:
   json_annotation: ^4.9.0
   logger: ^2.0.2+1
+  lottie: ^3.2.0
   meta:
   package_info_plus: ^8.0.0
   path_provider: ^2.0.12
@@ -101,6 +102,7 @@ flutter:
     - assets/
     - assets/icons/
     - assets/images/
+    - assets/lottie/
 
 
   fonts:

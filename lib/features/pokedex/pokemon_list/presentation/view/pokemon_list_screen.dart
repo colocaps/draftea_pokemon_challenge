@@ -2,6 +2,7 @@ import 'package:draftea_pokemon_challenge/di/injection.dart';
 import 'package:draftea_pokemon_challenge/features/pokedex/pokemon_list/domain/usecase/get_pokemon_list_usecase.dart';
 import 'package:draftea_pokemon_challenge/features/pokedex/pokemon_list/presentation/cubit/pokemon_list_cubit.dart';
 import 'package:draftea_pokemon_challenge/features/pokedex/pokemon_list/presentation/view/pokemon_list_page.dart';
+import 'package:draftea_pokemon_challenge/features/pokedex/pokemon_list/presentation/widget/pokemon_list_details.dart';
 import 'package:draftea_pokemon_challenge/gen/assets.gen.dart';
 import 'package:draftea_pokemon_challenge/ui/container/page_container.dart';
 import 'package:draftea_pokemon_challenge/ui/label/custom_label.dart';
@@ -13,6 +14,8 @@ class PokemonListScreen extends StatelessWidget {
   const PokemonListScreen({super.key});
   static const String routeName = '/pokemon-list';
   static const String path = '/pokemon-list';
+
+  static const double _masterDetailBreakpoint = 900; // tablet/desktop
 
   @override
   Widget build(BuildContext context) {
@@ -36,21 +39,34 @@ class PokemonListScreen extends StatelessWidget {
             context.read<PokemonListCubit>().clearError();
           }
         },
-        child: const PageContainerSliver(
-          canPop: false,
-          useGradientBackground: true,
-          sliverAppbar: SliverAppBar(
-            automaticallyImplyLeading: false,
-            centerTitle: true,
-            backgroundColor: Colors.transparent,
-            title: CustomLabel(
-              color: Colors.white,
-              text: 'Pokedex',
-              minFontsize: 20,
-              fontWeight: FontWeight.bold,
-            ),
-          ),
-          slivers: [PokemonListSliver()],
+        child: LayoutBuilder(
+          builder: (context, constraints) {
+            final isWide = constraints.maxWidth >= _masterDetailBreakpoint;
+
+            return PageContainerSliver(
+              canPop: false,
+              useGradientBackground: true,
+
+              neverScrollable: isWide,
+              sliverAppbar: const SliverAppBar(
+                automaticallyImplyLeading: false,
+                centerTitle: true,
+                backgroundColor: Colors.transparent,
+                title: CustomLabel(
+                  color: Colors.white,
+                  text: 'Pokedex',
+                  minFontsize: 20,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+              slivers: [
+                if (isWide)
+                  const SliverFillRemaining(child: PokemonListDetail())
+                else
+                  const PokemonListPage(),
+              ],
+            );
+          },
         ),
       ),
     );

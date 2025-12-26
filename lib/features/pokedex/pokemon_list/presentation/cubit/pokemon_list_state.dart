@@ -9,5 +9,6 @@ abstract class PokemonListState with _$PokemonListState {
     String? errorMessage,
     DateTime? dateTime,
     PokemonListStatus? status,
+    @Default('1') String selectedIdOrName,
   }) = _PokemonListState;
 }
