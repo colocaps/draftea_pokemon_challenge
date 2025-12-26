@@ -125,7 +125,7 @@ class _PokemonThumbnail extends StatelessWidget {
                   height: 16,
                   child: CircularProgressIndicator(
                     strokeWidth: 2,
-                    color: Colors.white.withValues(alpha: 0.8),
+                    color: Colors.red.withValues(alpha: 0.8),
                   ),
                 ),
               );

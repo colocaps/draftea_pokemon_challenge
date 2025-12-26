@@ -59,7 +59,9 @@ class _PokemonListDetailState extends State<PokemonListDetail> {
               final hasMore = state.pokemonList?.next != null;
 
               if (isInitialLoading) {
-                return const Center(child: CircularProgressIndicator());
+                return const Center(
+                  child: CircularProgressIndicator(color: Colors.red),
+                );
               }
 
               final total = results.length + (isLoadingMore || hasMore ? 1 : 0);
@@ -72,7 +74,9 @@ class _PokemonListDetailState extends State<PokemonListDetail> {
                     if (isLoadingMore) {
                       return const Padding(
                         padding: EdgeInsets.symmetric(vertical: 16),
-                        child: Center(child: CircularProgressIndicator()),
+                        child: Center(
+                          child: CircularProgressIndicator(color: Colors.red),
+                        ),
                       );
                     }
                     if (!hasMore) {

@@ -1,7 +1,7 @@
-import 'package:flutter/material.dart';
 import 'package:draftea_pokemon_challenge/gen/fonts.gen.dart';
 import 'package:draftea_pokemon_challenge/ui/colors/colors.dart';
 import 'package:draftea_pokemon_challenge/ui/themes/font_sizes.dart';
+import 'package:flutter/material.dart';
 
 abstract class LightTheme {
   static const String _subtitleFontFamily = FontFamily.metropolis;
@@ -31,8 +31,8 @@ abstract class LightTheme {
       cardTheme: const CardThemeData(surfaceTintColor: Color(0xffF7FCF7)),
       dropdownMenuTheme: _lighDropdownMenuThemeData(),
       scrollbarTheme: const ScrollbarThemeData(
-        thumbColor: WidgetStatePropertyAll(Color(0xFF8A63F4)),
-        trackColor: WidgetStatePropertyAll(Colors.white24),
+        thumbColor: WidgetStatePropertyAll(Color.fromARGB(255, 239, 3, 3)),
+        trackColor: WidgetStatePropertyAll(Color.fromARGB(60, 234, 54, 54)),
         thickness: WidgetStatePropertyAll(4),
         radius: Radius.circular(8),
       ),

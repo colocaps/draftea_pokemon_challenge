@@ -53,7 +53,9 @@ class PokemonListPage extends StatelessWidget {
                 if (isLoadingMore) {
                   return const Padding(
                     padding: EdgeInsets.symmetric(vertical: 16),
-                    child: Center(child: CircularProgressIndicator()),
+                    child: Center(
+                      child: CircularProgressIndicator(color: Colors.red),
+                    ),
                   );
                 }
                 if (!hasMore) {

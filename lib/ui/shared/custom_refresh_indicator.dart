@@ -2,7 +2,6 @@ import 'dart:math' as math;
 
 import 'package:custom_refresh_indicator/custom_refresh_indicator.dart';
 import 'package:flutter/material.dart';
-import 'package:draftea_pokemon_challenge/ui/colors/colors.dart';
 
 class CustomRefreshIndicator extends StatelessWidget {
   const CustomRefreshIndicator({
@@ -41,7 +40,7 @@ class CustomRefreshIndicator extends StatelessWidget {
           padding: const EdgeInsets.all(6),
           child: CircularProgressIndicator(
             strokeWidth: 6,
-            color: CustomColors.primary,
+            color: Colors.red,
             value: controller.state.isLoading
                 ? null
                 : math.min(controller.value, 1),
