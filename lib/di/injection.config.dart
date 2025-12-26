@@ -34,6 +34,8 @@ import 'package:draftea_pokemon_challenge/core/repository/user_feature_repositor
 import 'package:draftea_pokemon_challenge/core/session/token.dart' as _i931;
 import 'package:draftea_pokemon_challenge/core/utils/timer_service.dart'
     as _i854;
+import 'package:draftea_pokemon_challenge/features/pokedex/pokemon_list/data/datasource/pokemon_list_datasource.dart'
+    as _i943;
 import 'package:draftea_pokemon_challenge/features/pokedex/pokemon_list/data/service/pokemon_list_service.dart'
     as _i180;
 import 'package:draftea_pokemon_challenge/ui/bottombar/domain/repository/bottom_bar_feature_repository.dart'
@@ -99,6 +101,11 @@ extension GetItInjectableX on _i174.GetIt {
     );
     gh.singleton<_i180.PokemonListService>(
       () => _i180.PokemonListService.new(gh<_i361.Dio>()),
+    );
+    gh.factory<_i943.PokemonListRemoteDataSource>(
+      () => _i943.PokemonListDatasourceImpl(
+        service: gh<_i180.PokemonListService>(),
+      ),
     );
     return this;
   }
