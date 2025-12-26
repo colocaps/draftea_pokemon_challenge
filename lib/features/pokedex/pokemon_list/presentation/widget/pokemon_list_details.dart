@@ -68,7 +68,17 @@ class _PokemonListDetailState extends State<PokemonListDetail> {
                 );
               }
 
-              final total = results.length + (isLoadingMore || hasMore ? 1 : 0);
+              if (results.isEmpty) {
+                return const Center(
+                  child: CustomLabel(
+                    text: 'No hay Pokémon para mostrar',
+                    color: Colors.white,
+                  ),
+                );
+              }
+
+              // Siempre mostramos un footer (spinner / fin de lista / espacio)
+              final total = results.length + 1;
               return ListView.builder(
                 controller: _listController,
                 padding: const EdgeInsets.only(top: 8, bottom: 16),

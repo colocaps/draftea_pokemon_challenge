@@ -36,7 +36,13 @@ class PokemonListPage extends StatelessWidget {
         }
 
         if (state.status == PokemonListStatus.loaded || isLoadingMore) {
-          final total = results.length + (isLoadingMore || hasMore ? 1 : 0);
+          if (results.isEmpty) {
+            return const SliverFillRemaining(
+              child: Center(child: Text('No hay Pokémon para mostrar')),
+            );
+          }
+
+          final total = results.length + 1;
           return SliverList(
             delegate: SliverChildBuilderDelegate((context, index) {
               if (state.status == PokemonListStatus.loaded &&

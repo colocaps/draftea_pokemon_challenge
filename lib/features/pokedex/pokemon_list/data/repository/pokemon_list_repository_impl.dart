@@ -43,7 +43,17 @@ class PokemonListRepositoryImpl extends BaseRepository
         final isRecoverable = status == null || (status >= 500);
         if (isRecoverable) {
           final cached = await localDataSource.getCachedPokemonList();
-          if (cached != null) return Right(cached);
+          if (cached != null) {
+            final currentOffset = offset ?? 0;
+
+            if (currentOffset == 0) {
+              return Right(cached.copyWith(next: null));
+            }
+
+            return Right(
+              PokemonListModel(count: cached.count, previous: cached.previous),
+            );
+          }
         }
         return Left(err);
       },

@@ -10,10 +10,11 @@ class NoInternetWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SafeArea(
+      top: false,
       child: Container(
         margin: const EdgeInsets.symmetric(horizontal: 20),
         child: Container(
-          margin: const EdgeInsets.only(top: 20),
+          margin: const EdgeInsets.only(bottom: 20),
           decoration: BoxDecoration(
             color: Colors.white,
             borderRadius: BorderRadius.circular(12),

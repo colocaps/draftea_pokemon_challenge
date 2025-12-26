@@ -28,20 +28,20 @@ class _RootPageState extends State<RootPage> {
           builder: (context, state) {
             return Stack(
               children: [
-                AbsorbPointer(
-                  absorbing: state is NotConnectedConnectivityCheckState,
-                  child: Opacity(
+                Scaffold(
+                  backgroundColor: Colors.blueGrey,
+                  body: Opacity(
                     opacity: state is NotConnectedConnectivityCheckState
-                        ? 0.4
+                        ? 0.8
                         : 1,
-                    child: Scaffold(
-                      backgroundColor: Colors.white,
-                      body: widget.child,
-                    ),
+                    child: widget.child,
                   ),
                 ),
                 state.maybeWhen(
-                  notConnectedState: NoInternetWidget.new,
+                  notConnectedState: () => const Align(
+                    alignment: Alignment.bottomCenter,
+                    child: NoInternetWidget(),
+                  ),
                   orElse: Container.new,
                 ),
               ],

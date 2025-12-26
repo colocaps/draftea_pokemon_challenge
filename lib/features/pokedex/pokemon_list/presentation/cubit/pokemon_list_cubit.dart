@@ -76,6 +76,23 @@ class PokemonListCubit extends Cubit<PokemonListState> {
       },
       (nextPage) {
         _isLoadingMore = false;
+
+        if (nextPage.results.isEmpty) {
+          emit(
+            state.copyWith(
+              status: PokemonListStatus.loaded,
+              pokemonList: PokemonListModel(
+                count: current.count,
+                previous: current.previous,
+                results: currentResults,
+              ),
+              errorMessage: null,
+              dateTime: DateTime.now(),
+            ),
+          );
+          return;
+        }
+
         final merged = <PokemonListItemModel>[
           ...currentResults,
           ...nextPage.results,
