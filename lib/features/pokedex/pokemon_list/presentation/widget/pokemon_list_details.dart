@@ -77,7 +77,6 @@ class _PokemonListDetailState extends State<PokemonListDetail> {
                 );
               }
 
-              // Siempre mostramos un footer (spinner / fin de lista / espacio)
               final total = results.length + 1;
               return ListView.builder(
                 controller: _listController,

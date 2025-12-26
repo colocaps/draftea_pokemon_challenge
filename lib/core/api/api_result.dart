@@ -1,5 +1,5 @@
-import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:draftea_pokemon_challenge/core/exceptions/http_exceptions.dart';
+import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'api_result.freezed.dart';
 
