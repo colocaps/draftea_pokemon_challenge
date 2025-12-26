@@ -1,8 +1,10 @@
 import 'package:draftea_pokemon_challenge/core/extentions/string_extentions.dart';
+import 'package:draftea_pokemon_challenge/features/pokedex/pokemon_details/presentation/view/pokemon_details_screen.dart';
 import 'package:draftea_pokemon_challenge/features/pokedex/pokemon_list/presentation/cubit/pokemon_list_cubit.dart';
 import 'package:draftea_pokemon_challenge/features/pokedex/pokemon_list/presentation/widget/pokemon_list_item.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 
 class PokemonListSliver extends StatelessWidget {
   const PokemonListSliver({super.key});
@@ -86,6 +88,14 @@ class PokemonListSliver extends StatelessWidget {
                   name: results[index].name.capitalize(),
                   id: _pokemonIdFromUrl(results[index].url),
                   formatId: _formatId,
+                  onTap: () {
+                    final id = _pokemonIdFromUrl(results[index].url);
+                    final idOrName = id?.toString() ?? results[index].name;
+                    context.pushNamed(
+                      PokemonDetailsScreen.routeName,
+                      pathParameters: {'idOrName': idOrName},
+                    );
+                  },
                 ),
               );
             }, childCount: total),

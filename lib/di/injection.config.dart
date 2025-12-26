@@ -28,6 +28,16 @@ import 'package:draftea_pokemon_challenge/core/networking/network_module.dart'
 import 'package:draftea_pokemon_challenge/core/session/token.dart' as _i931;
 import 'package:draftea_pokemon_challenge/core/utils/timer_service.dart'
     as _i854;
+import 'package:draftea_pokemon_challenge/features/pokedex/pokemon_details/data/datasource/pokemon_details_datasource.dart'
+    as _i641;
+import 'package:draftea_pokemon_challenge/features/pokedex/pokemon_details/data/repository/pokemon_details_repository_impl.dart'
+    as _i600;
+import 'package:draftea_pokemon_challenge/features/pokedex/pokemon_details/data/service/pokemon_details_service.dart'
+    as _i445;
+import 'package:draftea_pokemon_challenge/features/pokedex/pokemon_details/domain/repository/pokemon_details_repository.dart'
+    as _i1026;
+import 'package:draftea_pokemon_challenge/features/pokedex/pokemon_details/domain/usecase/get_pokemon_details_usecase.dart'
+    as _i196;
 import 'package:draftea_pokemon_challenge/features/pokedex/pokemon_list/data/datasource/pokemon_list_datasource.dart'
     as _i943;
 import 'package:draftea_pokemon_challenge/features/pokedex/pokemon_list/data/repository/pokemon_list_repository_impl.dart'
@@ -88,6 +98,19 @@ extension GetItInjectableX on _i174.GetIt {
     gh.singleton<_i180.PokemonListService>(
       () => _i180.PokemonListService.new(gh<_i361.Dio>()),
     );
+    gh.singleton<_i445.PokemonDetailsService>(
+      () => _i445.PokemonDetailsService.new(gh<_i361.Dio>()),
+    );
+    gh.factory<_i641.PokemonDetailsRemoteDataSource>(
+      () => _i641.PokemonDetailsDatasourceImpl(
+        service: gh<_i445.PokemonDetailsService>(),
+      ),
+    );
+    gh.factory<_i1026.PokemonDetailsRepository>(
+      () => _i600.PokemonDetailsRepositoryImpl(
+        remoteDataSource: gh<_i641.PokemonDetailsRemoteDataSource>(),
+      ),
+    );
     gh.factory<_i943.PokemonListRemoteDataSource>(
       () => _i943.PokemonListDatasourceImpl(
         service: gh<_i180.PokemonListService>(),
@@ -101,6 +124,11 @@ extension GetItInjectableX on _i174.GetIt {
     gh.factory<_i332.GetPokemonListUsecase>(
       () => _i332.GetPokemonListUsecaseImpl(
         repository: gh<_i624.PokemonListRepository>(),
+      ),
+    );
+    gh.factory<_i196.GetPokemonDetailsUsecase>(
+      () => _i196.GetPokemonDetailsUsecaseImpl(
+        repository: gh<_i1026.PokemonDetailsRepository>(),
       ),
     );
     return this;

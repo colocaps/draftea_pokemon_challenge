@@ -1,6 +1,7 @@
 import 'dart:developer';
 
 import 'package:draftea_pokemon_challenge/app/root_page.dart';
+import 'package:draftea_pokemon_challenge/features/pokedex/pokemon_details/presentation/view/pokemon_details_screen.dart';
 import 'package:draftea_pokemon_challenge/features/pokedex/pokemon_list/presentation/view/pokemon_list_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
@@ -39,6 +40,14 @@ final mainRoutes = [
             name: PokemonListScreen.routeName,
             builder: (context, state) {
               return const PokemonListScreen();
+            },
+          ),
+          GoRoute(
+            path: PokemonDetailsScreen.path,
+            name: PokemonDetailsScreen.routeName,
+            builder: (context, state) {
+              final idOrName = state.pathParameters['idOrName'] ?? '';
+              return PokemonDetailsScreen(idOrName: idOrName);
             },
           ),
         ],

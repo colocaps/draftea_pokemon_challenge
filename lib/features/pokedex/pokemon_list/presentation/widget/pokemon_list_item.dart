@@ -7,6 +7,7 @@ class PokemonListItemCard extends StatelessWidget {
     required this.name,
     required this.id,
     required this.formatId,
+    this.onTap,
     super.key,
   });
 
@@ -14,6 +15,7 @@ class PokemonListItemCard extends StatelessWidget {
   final String name;
   final int? id;
   final String Function(int id) formatId;
+  final VoidCallback? onTap;
 
   @override
   Widget build(BuildContext context) {
@@ -21,39 +23,43 @@ class PokemonListItemCard extends StatelessWidget {
 
     return Material(
       color: Colors.transparent,
-      child: DecoratedBox(
-        decoration: BoxDecoration(
-          color: Colors.white.withValues(alpha: 0.08),
-          borderRadius: BorderRadius.circular(14),
-          border: Border.all(color: Colors.white.withValues(alpha: 0.10)),
-        ),
-        child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 10),
-          child: Row(
-            children: [
-              _PokemonThumbnail(id: id),
-              const SizedBox(width: 12),
-              Expanded(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    CustomLabel(text: name, color: Colors.white, maxLines: 1),
-                    const SizedBox(height: 2),
-                    CustomLabel(
-                      text: subtitle,
-                      color: Colors.white.withValues(alpha: 0.75),
-                      style: Theme.of(context).textTheme.labelMedium,
-                      maxLines: 1,
-                    ),
-                  ],
+      child: InkWell(
+        borderRadius: BorderRadius.circular(14),
+        onTap: onTap,
+        child: DecoratedBox(
+          decoration: BoxDecoration(
+            color: Colors.white.withValues(alpha: 0.08),
+            borderRadius: BorderRadius.circular(14),
+            border: Border.all(color: Colors.white.withValues(alpha: 0.10)),
+          ),
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 10),
+            child: Row(
+              children: [
+                _PokemonThumbnail(id: id),
+                const SizedBox(width: 12),
+                Expanded(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      CustomLabel(text: name, color: Colors.white, maxLines: 1),
+                      const SizedBox(height: 2),
+                      CustomLabel(
+                        text: subtitle,
+                        color: Colors.white.withValues(alpha: 0.75),
+                        style: Theme.of(context).textTheme.labelMedium,
+                        maxLines: 1,
+                      ),
+                    ],
+                  ),
                 ),
-              ),
-              const SizedBox(width: 10),
-              Icon(
-                Icons.chevron_right_rounded,
-                color: Colors.white.withValues(alpha: 0.65),
-              ),
-            ],
+                const SizedBox(width: 10),
+                Icon(
+                  Icons.chevron_right_rounded,
+                  color: Colors.white.withValues(alpha: 0.65),
+                ),
+              ],
+            ),
           ),
         ),
       ),
