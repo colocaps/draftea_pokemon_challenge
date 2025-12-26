@@ -21,7 +21,7 @@ class _PokemonDetailsService implements PokemonDetailsService {
 
   @override
   Future<PokemonDetailsResponseDto> getPokemonDetails(String idOrName) async {
-    final _extra = <String, dynamic>{'Authorization': true};
+    final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
     const Map<String, dynamic>? _data = null;

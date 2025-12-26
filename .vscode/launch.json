@@ -14,7 +14,7 @@
         "-t",
         "lib/main/main_dev.dart",
         "--flavor",
-        "appDev",
+        "development",
         "--dart-define-from-file=.env/appDev.json"
       ]
     },

@@ -51,12 +51,16 @@ class $AssetsIconsGen {
 class $AssetsImagesGen {
   const $AssetsImagesGen();
 
-  /// File path: assets/images/draftea_logo.png
-  AssetGenImage get drafteaLogo =>
-      const AssetGenImage('assets/images/draftea_logo.png');
+  /// File path: assets/images/pokemon_launcher.jpg
+  AssetGenImage get pokemonLauncherJpg =>
+      const AssetGenImage('assets/images/pokemon_launcher.jpg');
+
+  /// File path: assets/images/pokemon_launcher.png
+  AssetGenImage get pokemonLauncherPng =>
+      const AssetGenImage('assets/images/pokemon_launcher.png');
 
   /// List of all assets
-  List<AssetGenImage> get values => [drafteaLogo];
+  List<AssetGenImage> get values => [pokemonLauncherJpg, pokemonLauncherPng];
 }
 
 class $AssetsLottieGen {

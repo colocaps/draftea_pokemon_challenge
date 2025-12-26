@@ -24,7 +24,7 @@ class _PokemonListService implements PokemonListService {
     int? limit,
     int? offset,
   }) async {
-    final _extra = <String, dynamic>{'Authorization': true};
+    final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{
       r'limit': limit,
       r'offset': offset,

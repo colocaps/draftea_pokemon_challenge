@@ -19,8 +19,6 @@ import 'package:draftea_pokemon_challenge/core/library/eventbus/event_bus_impl.d
     as _i65;
 import 'package:draftea_pokemon_challenge/core/networking/inerceptor.dart'
     as _i1065;
-import 'package:draftea_pokemon_challenge/core/networking/interceptor.dart'
-    as _i969;
 import 'package:draftea_pokemon_challenge/core/networking/logger_module.dart'
     as _i132;
 import 'package:draftea_pokemon_challenge/core/networking/network_module.dart'
@@ -67,18 +65,18 @@ extension GetItInjectableX on _i174.GetIt {
     _i526.EnvironmentFilter? environmentFilter,
   }) async {
     final gh = _i526.GetItHelper(this, environment, environmentFilter);
-    final loggerModule = _$LoggerModule();
     final sharedPreferencesModule = _$SharedPreferencesModule();
+    final loggerModule = _$LoggerModule();
     final networkModule = _$NetworkModule();
+    await gh.factoryAsync<_i460.SharedPreferences>(
+      () => sharedPreferencesModule.prefs,
+      preResolve: true,
+    );
     gh.factory<_i395.ConnectivityCheckBloc>(
       () => _i395.ConnectivityCheckBloc(),
     );
     gh.factory<_i528.PrettyDioLogger>(() => loggerModule.prettyDioLogger);
     gh.factory<_i931.Token>(() => _i931.Token());
-    await gh.factoryAsync<_i460.SharedPreferences>(
-      () => sharedPreferencesModule.prefs,
-      preResolve: true,
-    );
     gh.lazySingleton<_i974.Logger>(() => loggerModule.logger);
     gh.lazySingleton<_i854.LobbyTimerService>(() => _i854.LobbyTimerService());
     gh.lazySingleton<_i854.GetLobbyTimerService>(
@@ -98,11 +96,6 @@ extension GetItInjectableX on _i174.GetIt {
     gh.singleton<_i889.ChEventBus>(() => _i65.ChEventBusImpl());
     gh.factory<_i898.PokemonListLocalDataSource>(
       () => _i898.PokemonListLocalDataSourceImpl(gh<_i460.SharedPreferences>()),
-    );
-    gh.factory<_i969.draftea_pokemon_challengeInterceptor>(
-      () => _i969.draftea_pokemon_challengeInterceptor(
-        appInfoRepository: gh<_i625.AppInfoRepository>(),
-      ),
     );
     gh.factory<_i1065.DrafteaInterceptor>(
       () => _i1065.DrafteaInterceptor(
@@ -157,8 +150,8 @@ extension GetItInjectableX on _i174.GetIt {
   }
 }
 
-class _$LoggerModule extends _i132.LoggerModule {}
-
 class _$SharedPreferencesModule extends _i82.SharedPreferencesModule {}
+
+class _$LoggerModule extends _i132.LoggerModule {}
 
 class _$NetworkModule extends _i276.NetworkModule {}
