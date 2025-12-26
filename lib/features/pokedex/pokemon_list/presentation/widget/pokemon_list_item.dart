@@ -1,3 +1,4 @@
+import 'package:draftea_pokemon_challenge/gen/assets.gen.dart';
 import 'package:draftea_pokemon_challenge/ui/label/custom_label.dart';
 import 'package:flutter/material.dart';
 
@@ -123,9 +124,9 @@ class _PokemonThumbnail extends StatelessWidget {
                 child: SizedBox(
                   width: 16,
                   height: 16,
-                  child: CircularProgressIndicator(
-                    strokeWidth: 2,
-                    color: Colors.red.withValues(alpha: 0.8),
+                  child: Assets.lottie.pokeballLoader.lottie(
+                    width: 16,
+                    height: 16,
                   ),
                 ),
               );

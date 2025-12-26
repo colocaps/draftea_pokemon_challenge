@@ -1,8 +1,8 @@
 // ignore_for_file: lines_longer_than_80_chars
 
-import 'package:flutter/material.dart';
 import 'package:draftea_pokemon_challenge/gen/assets.gen.dart';
 import 'package:draftea_pokemon_challenge/ui/label/custom_label.dart';
+import 'package:flutter/material.dart';
 
 class NoInternetWidget extends StatelessWidget {
   const NoInternetWidget({super.key});
@@ -59,16 +59,6 @@ class NoInternetWidget extends StatelessWidget {
                   ),
                 ),
                 const SizedBox(height: 5),
-                CustomLabel(
-                  maxLines: 3,
-                  text:
-                      'Las salas creadas o partidas en curso seguirán activas. Reconectate rápido.',
-                  color: Colors.black,
-                  style: Theme.of(context).textTheme.displaySmall!.copyWith(
-                    fontSize: 13,
-                    fontWeight: FontWeight.normal,
-                  ),
-                ),
               ],
             ),
           ),

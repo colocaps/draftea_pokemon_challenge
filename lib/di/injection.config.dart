@@ -28,8 +28,12 @@ import 'package:draftea_pokemon_challenge/core/networking/network_module.dart'
 import 'package:draftea_pokemon_challenge/core/session/token.dart' as _i931;
 import 'package:draftea_pokemon_challenge/core/utils/timer_service.dart'
     as _i854;
+import 'package:draftea_pokemon_challenge/di/shared_preferences_module.dart'
+    as _i82;
 import 'package:draftea_pokemon_challenge/features/pokedex/pokemon_details/data/datasource/pokemon_details_datasource.dart'
     as _i641;
+import 'package:draftea_pokemon_challenge/features/pokedex/pokemon_details/data/datasource/pokemon_details_local_datasource.dart'
+    as _i497;
 import 'package:draftea_pokemon_challenge/features/pokedex/pokemon_details/data/repository/pokemon_details_repository_impl.dart'
     as _i600;
 import 'package:draftea_pokemon_challenge/features/pokedex/pokemon_details/data/service/pokemon_details_service.dart'
@@ -40,6 +44,8 @@ import 'package:draftea_pokemon_challenge/features/pokedex/pokemon_details/domai
     as _i196;
 import 'package:draftea_pokemon_challenge/features/pokedex/pokemon_list/data/datasource/pokemon_list_datasource.dart'
     as _i943;
+import 'package:draftea_pokemon_challenge/features/pokedex/pokemon_list/data/datasource/pokemon_list_local_datasource.dart'
+    as _i898;
 import 'package:draftea_pokemon_challenge/features/pokedex/pokemon_list/data/repository/pokemon_list_repository_impl.dart'
     as _i818;
 import 'package:draftea_pokemon_challenge/features/pokedex/pokemon_list/data/service/pokemon_list_service.dart'
@@ -52,21 +58,27 @@ import 'package:get_it/get_it.dart' as _i174;
 import 'package:injectable/injectable.dart' as _i526;
 import 'package:logger/logger.dart' as _i974;
 import 'package:pretty_dio_logger/pretty_dio_logger.dart' as _i528;
+import 'package:shared_preferences/shared_preferences.dart' as _i460;
 
 extension GetItInjectableX on _i174.GetIt {
   // initializes the registration of main-scope dependencies inside of GetIt
-  _i174.GetIt init({
+  Future<_i174.GetIt> init({
     String? environment,
     _i526.EnvironmentFilter? environmentFilter,
-  }) {
+  }) async {
     final gh = _i526.GetItHelper(this, environment, environmentFilter);
     final loggerModule = _$LoggerModule();
+    final sharedPreferencesModule = _$SharedPreferencesModule();
     final networkModule = _$NetworkModule();
     gh.factory<_i395.ConnectivityCheckBloc>(
       () => _i395.ConnectivityCheckBloc(),
     );
     gh.factory<_i528.PrettyDioLogger>(() => loggerModule.prettyDioLogger);
     gh.factory<_i931.Token>(() => _i931.Token());
+    await gh.factoryAsync<_i460.SharedPreferences>(
+      () => sharedPreferencesModule.prefs,
+      preResolve: true,
+    );
     gh.lazySingleton<_i974.Logger>(() => loggerModule.logger);
     gh.lazySingleton<_i854.LobbyTimerService>(() => _i854.LobbyTimerService());
     gh.lazySingleton<_i854.GetLobbyTimerService>(
@@ -77,8 +89,16 @@ extension GetItInjectableX on _i174.GetIt {
       () => _i854.LobbyListTimerService(),
     );
     gh.lazySingleton<_i854.UserTimerService>(() => _i854.UserTimerService());
+    gh.factory<_i497.PokemonDetailsLocalDataSource>(
+      () => _i497.PokemonDetailsLocalDataSourceImpl(
+        gh<_i460.SharedPreferences>(),
+      ),
+    );
     gh.factory<_i625.AppInfoRepository>(() => _i625.AppInfoRepositoryImpl());
     gh.singleton<_i889.ChEventBus>(() => _i65.ChEventBusImpl());
+    gh.factory<_i898.PokemonListLocalDataSource>(
+      () => _i898.PokemonListLocalDataSourceImpl(gh<_i460.SharedPreferences>()),
+    );
     gh.factory<_i969.draftea_pokemon_challengeInterceptor>(
       () => _i969.draftea_pokemon_challengeInterceptor(
         appInfoRepository: gh<_i625.AppInfoRepository>(),
@@ -109,6 +129,7 @@ extension GetItInjectableX on _i174.GetIt {
     gh.factory<_i1026.PokemonDetailsRepository>(
       () => _i600.PokemonDetailsRepositoryImpl(
         remoteDataSource: gh<_i641.PokemonDetailsRemoteDataSource>(),
+        localDataSource: gh<_i497.PokemonDetailsLocalDataSource>(),
       ),
     );
     gh.factory<_i943.PokemonListRemoteDataSource>(
@@ -116,9 +137,15 @@ extension GetItInjectableX on _i174.GetIt {
         service: gh<_i180.PokemonListService>(),
       ),
     );
+    gh.factory<_i196.GetPokemonDetailsUsecase>(
+      () => _i196.GetPokemonDetailsUsecaseImpl(
+        repository: gh<_i1026.PokemonDetailsRepository>(),
+      ),
+    );
     gh.factory<_i624.PokemonListRepository>(
       () => _i818.PokemonListRepositoryImpl(
         remoteDataSource: gh<_i943.PokemonListRemoteDataSource>(),
+        localDataSource: gh<_i898.PokemonListLocalDataSource>(),
       ),
     );
     gh.factory<_i332.GetPokemonListUsecase>(
@@ -126,15 +153,12 @@ extension GetItInjectableX on _i174.GetIt {
         repository: gh<_i624.PokemonListRepository>(),
       ),
     );
-    gh.factory<_i196.GetPokemonDetailsUsecase>(
-      () => _i196.GetPokemonDetailsUsecaseImpl(
-        repository: gh<_i1026.PokemonDetailsRepository>(),
-      ),
-    );
     return this;
   }
 }
 
 class _$LoggerModule extends _i132.LoggerModule {}
+
+class _$SharedPreferencesModule extends _i82.SharedPreferencesModule {}
 
 class _$NetworkModule extends _i276.NetworkModule {}

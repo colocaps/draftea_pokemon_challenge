@@ -3,6 +3,7 @@ import 'package:draftea_pokemon_challenge/features/pokedex/pokemon_details/prese
 import 'package:draftea_pokemon_challenge/features/pokedex/pokemon_list/presentation/cubit/pokemon_list_cubit.dart';
 import 'package:draftea_pokemon_challenge/features/pokedex/pokemon_list/presentation/widget/pokemon_list_item.dart';
 import 'package:draftea_pokemon_challenge/features/pokedex/utils/pokemon_utils.dart';
+import 'package:draftea_pokemon_challenge/gen/assets.gen.dart';
 import 'package:draftea_pokemon_challenge/ui/label/custom_label.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -59,8 +60,11 @@ class _PokemonListDetailState extends State<PokemonListDetail> {
               final hasMore = state.pokemonList?.next != null;
 
               if (isInitialLoading) {
-                return const Center(
-                  child: CircularProgressIndicator(color: Colors.red),
+                return Center(
+                  child: Assets.lottie.pokeballLoader.lottie(
+                    width: 40,
+                    height: 40,
+                  ),
                 );
               }
 
@@ -72,10 +76,13 @@ class _PokemonListDetailState extends State<PokemonListDetail> {
                 itemBuilder: (context, index) {
                   if (index >= results.length) {
                     if (isLoadingMore) {
-                      return const Padding(
-                        padding: EdgeInsets.symmetric(vertical: 16),
+                      return Padding(
+                        padding: const EdgeInsets.symmetric(vertical: 16),
                         child: Center(
-                          child: CircularProgressIndicator(color: Colors.red),
+                          child: Assets.lottie.pokeballLoader.lottie(
+                            width: 20,
+                            height: 20,
+                          ),
                         ),
                       );
                     }

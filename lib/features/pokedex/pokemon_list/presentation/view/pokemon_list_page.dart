@@ -51,10 +51,13 @@ class PokemonListPage extends StatelessWidget {
 
               if (index >= results.length) {
                 if (isLoadingMore) {
-                  return const Padding(
-                    padding: EdgeInsets.symmetric(vertical: 16),
+                  return Padding(
+                    padding: const EdgeInsets.symmetric(vertical: 16),
                     child: Center(
-                      child: CircularProgressIndicator(color: Colors.red),
+                      child: Assets.lottie.pokeballLoader.lottie(
+                        width: 100,
+                        height: 100,
+                      ),
                     ),
                   );
                 }
