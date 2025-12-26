@@ -1,8 +1,8 @@
-import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:draftea_pokemon_challenge/ui/colors/colors.dart';
 import 'package:draftea_pokemon_challenge/ui/label/custom_label.dart';
 import 'package:draftea_pokemon_challenge/ui/themes/theme_helper.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 class CustomInputText extends StatefulWidget {
   const CustomInputText({

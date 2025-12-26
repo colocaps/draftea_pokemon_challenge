@@ -1,6 +1,6 @@
-import 'package:flutter/material.dart';
 import 'package:draftea_pokemon_challenge/gen/assets.gen.dart';
 import 'package:draftea_pokemon_challenge/ui/colors/colors.dart';
+import 'package:flutter/material.dart';
 
 class IconWithDescription extends StatelessWidget {
   const IconWithDescription({

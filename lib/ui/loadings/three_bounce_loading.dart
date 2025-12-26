@@ -1,5 +1,5 @@
-import 'package:flutter/material.dart';
 import 'package:draftea_pokemon_challenge/ui/loadings/tween/delay_tween.dart';
+import 'package:flutter/material.dart';
 
 class ThreeBounceLoading extends StatefulWidget {
   const ThreeBounceLoading({

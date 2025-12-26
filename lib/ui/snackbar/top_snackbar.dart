@@ -1,5 +1,5 @@
-import 'package:flutter/material.dart';
 import 'package:draftea_pokemon_challenge/ui/label/custom_label.dart';
+import 'package:flutter/material.dart';
 import 'package:top_snackbar_flutter/top_snack_bar.dart';
 
 void showTopSnackbar({

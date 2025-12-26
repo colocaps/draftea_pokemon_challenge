@@ -1,7 +1,7 @@
-import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:draftea_pokemon_challenge/gen/assets.gen.dart';
 import 'package:draftea_pokemon_challenge/ui/snackbar/top_snackbar.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 void copyToClipboard({
   required BuildContext context,

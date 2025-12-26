@@ -1,7 +1,7 @@
-import 'package:get_it/get_it.dart';
-import 'package:injectable/injectable.dart';
 import 'package:draftea_pokemon_challenge/core/env/environment.dart' as app_env;
 import 'package:draftea_pokemon_challenge/di/injection.config.dart';
+import 'package:get_it/get_it.dart';
+import 'package:injectable/injectable.dart';
 
 GetIt getIt = GetIt.instance;
 

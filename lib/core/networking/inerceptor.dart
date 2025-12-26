@@ -30,8 +30,7 @@ class DrafteaInterceptor extends BaseInterceptor {
     options
       ..connectTimeout = const Duration(seconds: 30)
       ..baseUrl = await baseUrl;
-    //  final token = await getFirebaseAuthToken();
-    //TODO: Add token
+
     if (hasExtra(source, options)) {
       options.headers['source'] = appInfoRepository.getPlatformInfo();
     }
@@ -39,11 +38,7 @@ class DrafteaInterceptor extends BaseInterceptor {
       final appVersion = await appInfoRepository.getAppVersion();
       options.headers['version'] = appVersion.version.getCleanVersion();
     }
-    // if (token.isNotEmpty) {
-    //   options.headers['Authorization'] = 'Bearer $token';
-    // } else {
-    //   options.headers.remove('Authorization');
-    // }
+
     options.validateStatus = (statusCode) {
       if (statusCode == null) {
         return false;

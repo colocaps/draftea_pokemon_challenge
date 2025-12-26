@@ -1,7 +1,7 @@
-import 'package:flutter/material.dart';
 import 'package:draftea_pokemon_challenge/gen/fonts.gen.dart';
 import 'package:draftea_pokemon_challenge/ui/colors/colors.dart';
 import 'package:draftea_pokemon_challenge/ui/themes/font_sizes.dart';
+import 'package:flutter/material.dart';
 
 abstract class DarkTheme {
   static const String _subtitleFontFamily = FontFamily.metropolis;

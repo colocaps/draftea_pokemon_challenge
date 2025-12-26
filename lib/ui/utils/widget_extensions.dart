@@ -1,5 +1,5 @@
-import 'package:flutter/material.dart';
 import 'package:draftea_pokemon_challenge/ui/shimmer/base_shimmer.dart';
+import 'package:flutter/material.dart';
 
 extension WidgetExt on Widget {
   Widget enabled({required bool isEnabled}) {

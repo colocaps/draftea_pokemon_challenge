@@ -1,8 +1,8 @@
-import 'package:flutter/material.dart';
 import 'package:draftea_pokemon_challenge/ui/colors/colors.dart';
 import 'package:draftea_pokemon_challenge/ui/label/custom_label.dart';
 import 'package:draftea_pokemon_challenge/ui/loadings/circle_loading.dart';
 import 'package:draftea_pokemon_challenge/ui/loadings/three_bounce_loading.dart';
+import 'package:flutter/material.dart';
 
 class CustomButton extends StatefulWidget {
   const CustomButton({

@@ -1,8 +1,8 @@
-import 'package:flutter/material.dart';
 import 'package:draftea_pokemon_challenge/ui/button/custom_button.dart';
 import 'package:draftea_pokemon_challenge/ui/colors/colors.dart';
 import 'package:draftea_pokemon_challenge/ui/label/custom_label.dart';
 import 'package:draftea_pokemon_challenge/ui/snackbar/top_snackbar.dart';
+import 'package:flutter/material.dart';
 
 class EnterButton extends StatefulWidget {
   const EnterButton({
