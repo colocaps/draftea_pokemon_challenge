@@ -1,0 +1,2 @@
+/Users/estebanfarias/draftea_pokemon_challenge/app-draftea_pokemon_challenge/android/app/.cxx/Debug/5o5t5w1r/armeabi-v7a/CMakeFiles/edit_cache.dir
+/Users/estebanfarias/draftea_pokemon_challenge/app-draftea_pokemon_challenge/android/app/.cxx/Debug/5o5t5w1r/armeabi-v7a/CMakeFiles/rebuild_cache.dir

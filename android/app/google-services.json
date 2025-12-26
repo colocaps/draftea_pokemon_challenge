@@ -1,0 +1,54 @@
+{
+  "project_info": {
+    "project_number": "227015294665",
+    "project_id": "draftea_pokemon_challenge-dev-3f2db",
+    "storage_bucket": "draftea_pokemon_challenge-dev-3f2db.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:227015294665:android:a0850064a8fc56120fd718",
+        "android_client_info": {
+          "package_name": "com.example.draftea_pokemon_challenge"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "227015294665-13jkn0lbg4lgjj712q4uv3hklo1hu4lu.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.draftea_pokemon_challenge",
+            "certificate_hash": "238353fb81938da0817251f427d838eb053ed985"
+          }
+        },
+        {
+          "client_id": "227015294665-su2moaptdggfcqjmk7uvvumiq7lmib7o.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD7Dku9ecvrLKi2eZ_jwlODR7LG4Mlh0DQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "227015294665-su2moaptdggfcqjmk7uvvumiq7lmib7o.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "227015294665-aaefi39nmi630ickap7h5uo95tclr9pa.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.gtkFlutter.RunnerTests"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

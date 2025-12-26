@@ -1,0 +1,14 @@
+include: package:very_good_analysis/analysis_options.5.1.0.yaml
+
+analyzer:
+  errors:
+    lines_longer_than_80_chars: ignore
+  exclude:
+    - "**/*.g.dart"
+    - "**/*.freezed.dart"
+    - "**/*.config.dart"
+
+linter:
+  rules:
+    public_member_api_docs: false
+    depend_on_referenced_packages: false

@@ -1,0 +1,2 @@
+/Users/estebanfarias/draftea_pokemon_challenge/app-draftea_pokemon_challenge/android/app/.cxx/RelWithDebInfo/534lp2mr/x86/CMakeFiles/edit_cache.dir
+/Users/estebanfarias/draftea_pokemon_challenge/app-draftea_pokemon_challenge/android/app/.cxx/RelWithDebInfo/534lp2mr/x86/CMakeFiles/rebuild_cache.dir

@@ -1,0 +1,38 @@
+{
+  // Use IntelliSense to learn about possible attributes.
+  // Hover to view descriptions of existing attributes.
+  // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+  "version": "0.2.0",
+  "configurations": [
+    
+    {
+      "name": "draftea Pokemon Challenge Dev mobile",
+      "request": "launch",
+      "type": "dart",
+      "program": "lib/main/main_dev.dart",
+      "args": [
+        "-t",
+        "lib/main/main_dev.dart",
+        "--flavor",
+        "appDev",
+        "--dart-define-from-file=.env/appDev.json"
+      ]
+    },
+   
+    {
+      "name": "draftea Pokemon Challenge Dev web",
+      "request": "launch",
+      "type": "dart",
+      "program": "lib/main/main_dev.dart",
+      "args": [
+        "-t",
+        "lib/main/main_dev.dart",
+        "--web-port",
+        "5000",
+        "--dart-define-from-file=.env/appDevWeb.json",
+        "--verbose"
+      ]
+    },
+  
+  ]
+}

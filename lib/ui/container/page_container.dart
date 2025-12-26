@@ -1,0 +1,261 @@
+import 'package:draftea_pokemon_challenge/ui/container/mesh_gradient_painter.dart';
+import 'package:draftea_pokemon_challenge/ui/utils/widget_extensions.dart';
+import 'package:flutter/foundation.dart';
+import 'package:flutter/material.dart';
+
+class PageContainer extends StatelessWidget {
+  const PageContainer({
+    required this.child,
+    super.key,
+    this.appbar,
+    this.resizeToAvoidBottomInset = false,
+    this.drawer,
+    this.drawerKey,
+    this.endDrawer,
+    this.backgroundColor,
+    this.useGradientBackground = false,
+    this.footer,
+    this.canPop = false,
+    this.onPopInvokedWithResult,
+  });
+
+  final Widget child;
+  final PreferredSizeWidget? appbar;
+  final bool resizeToAvoidBottomInset;
+  final Widget? drawer;
+  final Widget? endDrawer;
+  final GlobalKey<ScaffoldState>? drawerKey;
+  final Color? backgroundColor;
+  final bool useGradientBackground;
+  final Widget? footer;
+  final bool canPop;
+  final PopInvokedWithResultCallback<dynamic>? onPopInvokedWithResult;
+
+  @override
+  Widget build(BuildContext context) {
+    Widget buildContent(Widget content) {
+      if (footer == null) {
+        return content;
+      }
+      return Column(
+        children: [
+          Expanded(child: content),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+            child: footer,
+          ),
+        ],
+      );
+    }
+
+    final scaffold = Scaffold(
+      key: drawerKey,
+      drawer: drawer,
+      endDrawer: endDrawer,
+      resizeToAvoidBottomInset: resizeToAvoidBottomInset,
+      backgroundColor: useGradientBackground
+          ? null
+          : (backgroundColor ?? Colors.black),
+      appBar: appbar,
+      body: useGradientBackground
+          ? Stack(
+              children: [
+                const MeshGradientWidget(
+                  controlPoints: [
+                    GradientControlPoint(
+                      position: Offset(0.2, 0.2),
+                      color: Color(0xFF2845D8),
+                    ),
+                    GradientControlPoint(
+                      position: Offset(0.8, 0.3),
+                      color: Color.fromARGB(255, 28, 12, 91),
+                    ),
+                    GradientControlPoint(
+                      position: Offset(0.4, 0.8),
+                      color: Color(0xFF001BA8),
+                    ),
+                    GradientControlPoint(
+                      position: Offset(0.6, 0.9),
+                      color: Color(0xFFC4B5E8),
+                    ),
+                  ],
+                ),
+                buildContent(
+                  SafeArea(
+                    maintainBottomViewPadding: true,
+                    child: child,
+                  ).horizontalGap(31),
+                ),
+              ],
+            )
+          : buildContent(
+              SafeArea(
+                maintainBottomViewPadding: true,
+                child: child,
+              ).horizontalGap(31),
+            ),
+    );
+
+    return PopScope<dynamic>(
+      canPop: canPop,
+      onPopInvokedWithResult: onPopInvokedWithResult,
+      child: scaffold,
+    );
+  }
+}
+
+class PageContainerSliver extends StatelessWidget {
+  const PageContainerSliver({
+    super.key,
+    this.resizeToAvoidBottomInset = false,
+    this.drawer,
+    this.drawerKey,
+    this.endDrawer,
+    this.backgroundColor,
+    this.sliverAppbar,
+    this.neverScrollable = false,
+    this.slivers = const [],
+    this.useGradientBackground = false,
+    this.footer,
+    this.overlay,
+    this.applyHorizontalPadding = false,
+    this.horizontalPadding = 30.0,
+    this.canPop = true,
+    this.onPopInvokedWithResult,
+  });
+
+  final SliverAppBar? sliverAppbar;
+  final bool resizeToAvoidBottomInset;
+  final Widget? drawer;
+  final Widget? endDrawer;
+  final GlobalKey<ScaffoldState>? drawerKey;
+  final Color? backgroundColor;
+  final bool neverScrollable;
+  final List<Widget> slivers;
+  final bool useGradientBackground;
+  final Widget? footer;
+  final Widget? overlay;
+  final bool applyHorizontalPadding;
+  final double horizontalPadding;
+  final bool canPop;
+  final PopInvokedWithResultCallback<dynamic>? onPopInvokedWithResult;
+
+  @override
+  Widget build(BuildContext context) {
+    final paddedSlivers = applyHorizontalPadding
+        ? slivers.map((sliver) {
+            return SliverPadding(
+              padding: EdgeInsets.symmetric(horizontal: horizontalPadding),
+              sliver: sliver,
+            );
+          }).toList()
+        : slivers;
+
+    Widget bodyContent = NestedScrollView(
+      physics: neverScrollable ? const NeverScrollableScrollPhysics() : null,
+      headerSliverBuilder: (context, innerBoxIsScrolled) => [
+        if (sliverAppbar != null) sliverAppbar!,
+      ],
+      body: CustomScrollView(
+        primary: true,
+        physics: neverScrollable
+            ? const NeverScrollableScrollPhysics()
+            : const ClampingScrollPhysics(),
+        slivers: paddedSlivers,
+      ),
+    );
+
+    if (applyHorizontalPadding) {
+      bodyContent = Center(
+        child: Container(
+          width: kIsWeb ? 500 : double.maxFinite,
+          padding: const EdgeInsets.symmetric(horizontal: 5),
+          child: bodyContent,
+        ),
+      );
+    }
+
+    Widget buildContent(Widget content) {
+      if (footer == null) {
+        return content;
+      }
+
+      final footerWidget = SafeArea(
+        top: false,
+        maintainBottomViewPadding: true,
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+          child: footer,
+        ),
+      );
+
+      // Si se aplica el padding horizontal, centrar y
+      //limitar el ancho del footer también
+      final wrappedFooter = applyHorizontalPadding
+          ? Center(
+              child: SizedBox(
+                width: kIsWeb ? 500 : double.maxFinite,
+                child: footerWidget,
+              ),
+            )
+          : footerWidget;
+
+      return Column(
+        children: [
+          Expanded(child: content),
+          wrappedFooter,
+        ],
+      );
+    }
+
+    Widget buildContentWithOverlay(Widget content) {
+      if (overlay == null) {
+        return buildContent(content);
+      }
+      return Stack(children: [buildContent(content), overlay!]);
+    }
+
+    final scaffold = Scaffold(
+      key: drawerKey,
+      drawer: drawer,
+      endDrawer: endDrawer,
+      resizeToAvoidBottomInset: resizeToAvoidBottomInset,
+      backgroundColor: useGradientBackground
+          ? null
+          : (backgroundColor ?? Colors.black),
+      body: useGradientBackground
+          ? Stack(
+              children: [
+                const MeshGradientWidget(
+                  controlPoints: [
+                    GradientControlPoint(
+                      position: Offset(0.8, 0.3),
+                      color: Color.fromARGB(255, 86, 53, 221),
+                    ),
+                    GradientControlPoint(
+                      position: Offset(0.4, 0.8),
+                      color: Color.fromARGB(255, 19, 6, 68),
+                    ),
+                    GradientControlPoint(
+                      position: Offset(0.6, 0.9),
+                      color: Color.fromARGB(255, 83, 39, 184),
+                    ),
+                    GradientControlPoint(
+                      position: Offset(0.2, 0.2),
+                      color: Color.fromARGB(255, 0, 2, 14),
+                    ),
+                  ],
+                ),
+                buildContentWithOverlay(bodyContent),
+              ],
+            )
+          : buildContentWithOverlay(bodyContent),
+    );
+
+    return PopScope<dynamic>(
+      canPop: canPop,
+      onPopInvokedWithResult: onPopInvokedWithResult,
+      child: scaffold,
+    );
+  }
+}
