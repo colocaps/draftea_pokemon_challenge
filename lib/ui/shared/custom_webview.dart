@@ -65,8 +65,8 @@ class _CustomWebViewState extends State<CustomWebView> {
     } else {
       body = const Center(child: Text('Invalid URL'));
     }
-    return PageContainer(
-      appbar: AppBar(
+    return PageContainerSliver(
+      sliverAppbar: SliverAppBar(
         automaticallyImplyLeading: false,
         centerTitle: true,
         leading: GestureDetector(
@@ -84,7 +84,7 @@ class _CustomWebViewState extends State<CustomWebView> {
         ),
         //  title: Assets.images.draftea_pokemon_challengeLogo.image(),
       ),
-      child: body!,
+      slivers: [SliverFillRemaining(child: body)],
     );
   }
 }

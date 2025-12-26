@@ -6,15 +6,15 @@ import 'package:draftea_pokemon_challenge/features/pokedex/pokemon_list/domain/m
 import 'package:draftea_pokemon_challenge/features/pokedex/pokemon_list/domain/repository/pokemon_list_repository.dart';
 import 'package:injectable/injectable.dart';
 
-abstract class PokemonListUsecase {
+abstract class GetPokemonListUsecase {
   Future<Either<HttpException, PokemonListModel>> call({
     int? limit,
     int? offset,
   });
 }
 
-@Injectable(as: PokemonListUsecase)
-class GetPokemonListUsecaseImpl extends PokemonListUsecase {
+@Injectable(as: GetPokemonListUsecase)
+class GetPokemonListUsecaseImpl extends GetPokemonListUsecase {
   GetPokemonListUsecaseImpl({required this.repository});
 
   final PokemonListRepository repository;

@@ -36,8 +36,14 @@ import 'package:draftea_pokemon_challenge/core/utils/timer_service.dart'
     as _i854;
 import 'package:draftea_pokemon_challenge/features/pokedex/pokemon_list/data/datasource/pokemon_list_datasource.dart'
     as _i943;
+import 'package:draftea_pokemon_challenge/features/pokedex/pokemon_list/data/repository/pokemon_list_repository_impl.dart'
+    as _i818;
 import 'package:draftea_pokemon_challenge/features/pokedex/pokemon_list/data/service/pokemon_list_service.dart'
     as _i180;
+import 'package:draftea_pokemon_challenge/features/pokedex/pokemon_list/domain/repository/pokemon_list_repository.dart'
+    as _i624;
+import 'package:draftea_pokemon_challenge/features/pokedex/pokemon_list/domain/usecase/get_pokemon_list_usecase.dart'
+    as _i332;
 import 'package:draftea_pokemon_challenge/ui/bottombar/domain/repository/bottom_bar_feature_repository.dart'
     as _i776;
 import 'package:get_it/get_it.dart' as _i174;
@@ -105,6 +111,16 @@ extension GetItInjectableX on _i174.GetIt {
     gh.factory<_i943.PokemonListRemoteDataSource>(
       () => _i943.PokemonListDatasourceImpl(
         service: gh<_i180.PokemonListService>(),
+      ),
+    );
+    gh.factory<_i624.PokemonListRepository>(
+      () => _i818.PokemonListRepositoryImpl(
+        remoteDataSource: gh<_i943.PokemonListRemoteDataSource>(),
+      ),
+    );
+    gh.factory<_i332.GetPokemonListUsecase>(
+      () => _i332.GetPokemonListUsecaseImpl(
+        repository: gh<_i624.PokemonListRepository>(),
       ),
     );
     return this;
