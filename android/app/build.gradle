@@ -71,19 +71,26 @@ android {
 }
     flavorDimensions "default"
     productFlavors {
-        appDev {
+        development {
             dimension "default"
             applicationIdSuffix ""
             versionNameSuffix ""
             applicationId "com.example.draftea_pokemon_challenge"
             resValue "string", "app_name", "draftea_pokemon_challenge Dev"
         }
-        appProd {
+        production {
             dimension "default"
             applicationIdSuffix ""
             versionNameSuffix ""
             applicationId "com.example.draftea_pokemon_challenge"
             resValue "string", "app_name", "draftea_pokemon_challenge"
+        }
+        mock {
+            dimension "default"
+            applicationIdSuffix ""
+            versionNameSuffix ""
+            applicationId "com.example.draftea_pokemon_challenge"
+            resValue "string", "app_name", "draftea_pokemon_challenge Mock"
         }
     }
     buildTypes {
